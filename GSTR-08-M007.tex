@@ -7,6 +7,23 @@
 \usepackage{epsfig}
 \usepackage{subfigure}
 \usepackage{graphicx}
+
+\usepackage{ifpdf}
+\ifpdf
+\usepackage{epstopdf}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[pdftex,bookmarks=true,hypertexnames=false]{hyperref}
+\hypersetup{
+  pdfauthor = {Daniel Lenz, Jing Liu},
+  pdftitle = {GSTR_08-M007},
+  pdfsubject = {Pulse shape simulation},
+  pdfkeywords = {Pulse shape simulation, germanium detector},
+}
+\pdfadjustspacing=1
+\else
+\usepackage[usenames,dvips]{color}
+\fi
+
 \setlength{\oddsidemargin}{0cm}
 \setlength{\evensidemargin}{0cm}
 \setlength{\topmargin}{-1cm}
@@ -40,7 +57,7 @@
 \begin{figure}
 \leftline{ \epsfig{file=GERDA-Logo.eps,width=0.15\textwidth}
 \hspace{3.2 cm} 
-GERDA Scientific / Technical Report: GSTR-08-M00x}
+GERDA Scientific / Technical Report: GSTR-08-M007}
 \end{figure} 
 
 \hspace{10.8cm} August 14th 2008 \\ 
