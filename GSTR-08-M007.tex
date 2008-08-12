@@ -1,0 +1,115 @@
+%--------------------------------------------------------
+% style 
+%--------------------------------------------------------
+
+\documentclass[11pt, a4paper]{article}
+
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-1cm}
+\setlength{\textheight}{23cm}
+\setlength{\textwidth}{16cm}
+
+\pagestyle{headings}
+
+\newcommand{\mage}     {{\sc MaGe}}
+\newcommand{\geant}    {{\sc GEANT4}}
+\newcommand{\rootv}    {{\sc ROOT}}
+\newcommand{\gerda}    {{\sc GERDA}}
+\newcommand{\majorana} {{\sc Majorana}} 
+\newcommand{\decay}   {{\sc DECAY0}}
+\newcommand{\eqref}[1]{Eq.\,(\ref{#1})}
+\newcommand{\eqsref}[2]{Eqs.\,(\ref{#1}),\,(\ref{#2})}
+\newcommand{\figref}[1]{Fig.\,\ref{#1}}
+\newcommand{\figsref}[2]{Figs.\,\ref{#1},\,\ref{#2}}
+\newcommand{\cms}{c.m.\,}
+ 
+%--------------------------------------------------------
+
+\begin{document}
+
+% -------------------------------------------------------- 
+% title 
+% -------------------------------------------------------- 
+
+\begin{titlepage}
+
+\begin{figure}
+\leftline{ \epsfig{file=GERDA-Logo.eps,width=0.15\textwidth}
+\hspace{3.2 cm} 
+GERDA Scientific / Technical Report: GSTR-08-M00x}
+\end{figure} 
+
+\hspace{10.8cm} August 14th 2008 \\ 
+
+\begin{center}
+
+\vspace{1.0cm}
+
+{\Large Pulse Shape Simulation and Analysis\\ } 
+
+\vspace{0.5cm} 
+
+%{\large \\ }
+
+\vspace{1.0cm}
+
+{\large 
+Daniel Lenz, Jing Liu
+}
+
+\vspace{1.0cm}
+
+{\it 
+Max-Planck-Institut f\"ur Physik, M\"unchen, Germany
+} 
+\vspace{2.0cm} 
+\begin{abstract}
+  This note contains 1. a detailed documentation of the pulse shape   simulation codes, 2. some basic verifications of the simulation   codes, and 3. some simple applications of the simulation.
+\end{abstract}
+\end{center} 
+
+\end{titlepage} 
+
+% -------------------------------------------------------- 
+% table of contents 
+% -------------------------------------------------------- 
+
+\pagenumbering{roman}
+
+\tableofcontents
+
+\pagebreak \setcounter{page}{1} \pagenumbering{arabic}
+
+% -------------------------------------------------------- 
+% main body 
+% -------------------------------------------------------- 
+
+\section{Documentation of the simulation package}
+\label{sec:manual}
+\input{drift}
+\input{field}
+
+\section{Verification of the simulation}
+\label{sec:verify}
+
+
+\section{Pulse shape analysis}
+\label{sec:physics}
+
+
+\clearpage
+ 
+\begin{thebibliography}{sotief}
+
+%\cite{Abt:2004yk}
+%\bibitem{Abt:2004yk} 
+
+\end{thebibliography}
+
+
+\end{document}
+
