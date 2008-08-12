@@ -78,7 +78,7 @@ The dependence of the experimental $\langle111\rangle$ and $\langle100\rangle$ d
   \label{eq:expe}  
   v_{e}^{exp}(E) = \frac{\mu_{0}E}{(1+(E/E_{0})^{\beta})^{1/\beta}} - \mu_{n}E.
 \end{equation}
-The fitted parameters values are presented in Table~\ref{tab:pars}
+The fitted parameters values are presented in Table~\ref{tab:pare}
 \begin{table}[tbhp]
   \centering
   \begin{tabular}{ccccc}\hline\hline
@@ -88,32 +88,68 @@ $\langle100\rangle$ & 42420 & 251 & 0.87 & 62\\ \hline\hline
   \end{tabular}
   \caption{Fit parameters for the experimental drift velocities in the 
 $\langle111\rangle$ and $\langle100\rangle$ directions.}
-\label{tab:pars}
+\label{tab:pare}
 \end{table}
 
 After determination of the parameters $\mathcal{A}$ and $\mathcal{R}$, the drift velocity can be calculated for any direction and any strength of the electric field.
 
 \subsection{Hole Drifting}
 \label{sec:hole}
+The three components $(v_{x^{\prime}}, v_{y^{\prime}}, v_{z^{\prime}})^{T}$ of the hole drift velocity $\mathbf{v}$ in the local coordinate $x^{\prime}y^{\prime}z^{\prime}$ (as shown in Fig.~\ref{fig:vsphere}) can be expressed as:
 \begin{equation}
   \label{eq:vsphere}
   \begin{array}{rcl}
-   v_{r} &=& v_{100}(E)[1-\Lambda(k_{0})(\sin(\theta)^{4}\sin(2\phi)^{2} + \sin(2\theta)^{2})]\\
-   v_{\theta} &=& v_{100}(E)\Omega(k_{0})[2\sin(\theta)^{3}\cos(\theta)\sin(2\phi)^{2} + \sin(4\theta)]\\
-    v_{\phi} &=& v_{100}(E)\Omega(k_{0})\sin(\theta)^{3}\sin(4\phi)
+   v_{x^{\prime}} = v_{r} &=& v_{100}(E)[1-\Lambda(k_{0})(\sin(\theta)^{4}\sin(2\phi)^{2} + \sin(2\theta)^{2})]\\
+   v_{y^{\prime}} = v_{\theta} &=& v_{100}(E)\Omega(k_{0})[2\sin(\theta)^{3}\cos(\theta)\sin(2\phi)^{2} + \sin(4\theta)]\\
+    v_{z^{\prime}} = v_{\phi} &=& v_{100}(E)\Omega(k_{0})\sin(\theta)^{3}\sin(4\phi)
   \end{array}
 \end{equation}
-
-
 \begin{figure}[tbhp]
   \centering
-  \includegraphics[width=0.5\textwidth]{vsphere.eps}  
-  \caption{Orientations of the crystal axes and valleys in the lab coordinate system XYZ.}
+  \includegraphics[width=0.6\textwidth]{vsphere.eps}  
+  \caption{Orientations of the crystal axes and valleys in the lab
+coordinate system XYZ.}
   \label{fig:vsphere}
 \end{figure}
+The mean wave number $k_{0}$ can be expressed as a function of $v_{rel} = v_{111}/v_{100}$:
+\begin{equation}
+  \label{eq:k0}
+   k_{0}(v_{rel}) = 9.2652 - 26.3467v_{rel} + 29.6137v_{rel}^{2} - 12.3689v_{rel}^{3}
+\end{equation}
+The function $\Lambda$ and $\Omega$ govern the amplitude of the anisotropy and can be expressed as
+\begin{equation}
+  \label{eq:lamb}
+   \Lambda(k_{0}) = -0.01322k_{0} + 0.41145k_{0}^{2} - 0.23657k_{0}^{3} + 0.04077k_{0}^{4}
+\end{equation}
+\begin{equation}
+  \label{eq:ome}
+   \Omega(k_{0}) = 0.006550k_{0} - 0.19946k_{0}^{2} + 0.09859k_{0}^{3} - 0.01559k_{0}^{4}
+\end{equation}
+The dependence of the experimental $\langle111\rangle$ and $\langle100\rangle$ drift velocities, \textit{i.e.} $v_{111}$ and $v_{100}$ on the electric field can be fitted with the empirical formula: 
+\begin{equation}
+  \label{eq:exph}  
+  v_{h}^{exp}(E) = \frac{\mu_{0}E}{(1+(E/E_{0})^{\beta})^{1/\beta}}.
+\end{equation}
+The fitted parameters values are presented in Table~\ref{tab:parh}
+\begin{table}[tbhp]
+  \centering
+  \begin{tabular}{cccc}\hline\hline
+    Direction & $\mu_{0} \left[ \frac{\mbox{cm}^{2}}{\mbox{V}\cdot\mbox{s}} \right]$ & $E_{0} \left[ \frac{\mbox{V}}{\mbox{cm}} \right]$ & $\beta$ \\\hline
+$\langle111\rangle$ & 107270 & 0.580 & 100 \\
+$\langle100\rangle$ & 66333 & 0.744 & 181 \\ \hline\hline
+  \end{tabular}
+  \caption{Fit parameters for the experimental drift velocities in the 
+$\langle111\rangle$ and $\langle100\rangle$ directions.}
+\label{tab:parh}
+\end{table}
 
+The three components $(v_{x}, v_{y}, v_{z})^{T}$ of the hole drift velocity $\mathbf{v}$ in the lab coordinate $xyz$ (as shown in Fig.~\ref{fig:vsphere}) can be calculated as:
+\begin{equation}
+  \label{eq:exph}  
+  \left( \ = \frac{\mu_{0}E}{(1+(E/E_{0})^{\beta})^{1/\beta}}.
+\end{equation}
 
 %%% Local Variables:
 %%% mode:latex
-%%% TeX-master: "GSTR-08-M00x"
+%%% TeX-master: "GSTR-08-M007"
 %%% End:
