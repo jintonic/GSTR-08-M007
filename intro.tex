@@ -1,0 +1,27 @@
+\subsection{Introduction}
+\label{sec:intro}
+
+Segmented germanium detectors will be used in the GERDA experiment~\cite{gerda} to search for neutrinoless double beta decays ($0 \nu 2 \beta$). Such events in general deposit energy locally. i.e. they are \textit{single-site events}. Most background events have photons in their final state which interact through Compton scattering causing energy deposition at different places and thus creating \textit{multi-site events}, which will be rejected.
+
+However, (1) there are some multi-site events which are confined to one segment and (2) there are some single-site events that happen on the boundary between two segments. The \textit{boundary events} are rejected erroneously, because the energy deposited is shared between segments. The analysis of the electrical pulses associated with the events can help with both problem categories. For events in category (1) the time development of the pulse can reveal a multi-site event; while for events in category (2) the relative strength of the two pulses plus the additional mirror pulses can reveal whether the interaction position is near the boundary or not.
+
+Pulse shape analysis can also help with several other aspects: rejection of background from $\alpha$-particle and neutron interactions with detectors, Compton continuum suppression~\cite{comcon}, detection of crystal structure~\cite{agata}, etc. In combination with crystal segmentation, pulse shape analysis plays a crucial role to reach an extremely low background count rate.
+
+There are several caveats to the pulse shape analysis by only using the real data samples. For instance, the double escape peak of 2.6 MeV $\gamma$-line from $^{208}$Tl is not located near the Q-value for double beta decay of $^{76}$Ge. In addition, the events from the peak are not uniformly distributed throughout the detector crystal~\cite{major}. The single Compton scattering events~\cite{xiang} was collected with a very low event rate ($\sim$1Hz). The low rate is intrinsic to the measurement and makes it difficult and time consuming to collect samples of satisfactory size. Therefore the data have to be complemented by reliable pulse shape simulation.
+
+The procedure of the pulse shape simulation~\cite{agata} can be described as follows:
+\begin{enumerate}
+\item Simulate the interactions of particles with the detector   crystals by using a GEANT4 based simulation package,   MaGe~\cite{mage} to get the distribution and amplitudes of the   energy deposits of the interactions;
+\item Translate the energy deposits into electron-hole pairs, i.e.   the charge carriers;
+\item Calculate the electrical field and weighting potential in the   crystal according to the high voltage applied to the detector, also   taking into account differences in impurities;
+\item Simulate the carrier drift at the calculated electrical field   taking into account the crystal orientation dependent anisotropy of   the drift velocities;
+\item Calculate the time development of the charges induced in the   electrodes by the carriers drift~\cite{igex}; (For segmented   germanium detectors, the mirror charges induced in the neighboring   segments can also be calculated.)
+\item Finally calculate the pulse shapes by taking into account the   electrical parameters such as the detector's resistance and   capacity, pre-amplifier's response and noise, cross talks between   segments, etc.
+\end{enumerate}
+An Object-Oriented pulse shape simulation package written in C++ is being co-developed by the GERGA and Majorana MC groups. It covers every aspect of the procedure. The structure of the codes is introduced in Sec.~\ref{sec:frame}. The calculation of the electric fields and potentials is described in Sec.~\ref{sec:field}. For the calculation of the charge carriers drift velocities please see Sec.~\ref{sec:drift}. The formation of the detector signals is described in Sec.~\ref{sec:signal}.
+
+
+%%% Local Variables:
+%%% mode:latex
+%%% TeX-master: "GSTR-08-M007"
+%%% End:
