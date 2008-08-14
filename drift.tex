@@ -1,17 +1,68 @@
 \subsection{Calculation of the charge carriers drift velocities}
 \label{sec:drift}
-Following a $\gamma$-ray interaction, the produced electron-hole pairs will separated and start to drift under the influence of the electrostatic field produced by the potential applied on the detector electrodes. One can define the mobility $\mu_{e,h}$ of the electrons $e$ and holes $h$ as the variable which gives the relation between the electric field $\mathbf{E}(\mathbf{r})$ and the drift velocity
+
+\subsubsection{Introduction}
+\label{sec:drin}
+Following a $\gamma$-ray interaction, the produced electron-hole pairs
+will separated and start to drift under the influence of the
+electrostatic field produced by the potential applied on the detector
+electrodes. One can define the mobility $\mu_{e,h}$ of the electrons
+$e$ and holes $h$ as the variable which gives the relation between the
+electric field $\mathbf{E}(\mathbf{r})$ and the drift velocity
 \begin{equation}
   \label{eq:mobi}
   \mathbf{v}(\mathbf{r}) = \mu_{e,h} \mathbf{E}(\mathbf{r}),
 \end{equation}
-where $\mathbf{r}$ indicates the position. $\mu_{e,h}$ depend on the temperature, the electric field and the structure of the germanium crystal.
+where $\mathbf{r}$ indicates the position. $\mu_{e,h}$ depend on the
+temperature, the electric field and the structure of the germanium
+crystal. As long as the electron and hole temperatures do not differ
+much from the lattice temperature, the drift velocity is proportional
+to the electrical field and the lattice orientation has no influence.
+In this case the mobility can be simplified to just a number
+$\mu_{e,h} = \mu_{0}$. In germanium detectors cooled at liquid
+nitrogen temperature the electron/hole pairs are hotter than the
+lattice. The drift velocity in this condition is influenced by the
+crystal lattice orientation and not always parallel to the applied
+electrical field.
 
-\subsubsection{Introduction}
-\label{sec:drin}
+Germanium has the same crystalline structure as silicon and diamond, namely, a face-centered cubic (FCC) structure, in which each atom lies at the center of a regular tetrahedron, and is surrounded at its apices by four atoms as shown in Fig.~\ref{fig:xtal}
+\begin{figure}[tbhp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{xtalStruc.eps}  
+  \caption{Structure of germanium crystal.}
+  \label{fig:xtal}
+\end{figure}
+
+Due to the crystal lattice symmetry in germanium, in three directions, the crystallographic $\langle100\rangle$, $\langle110\rangle$ and $\langle111\rangle$, the mobility always has to be aligned with the electrical field. Consequently, the drift velocity has to be aligned with the symmetry axis. Therefore we can obtain not transverse anisotropy but longitudinal anisotropy of the drift mobility. Experimental data on the longitudinal anisotropy in these specific directions can be found in literature. The mobility data can be well fitted in any principal crystallographic direction with the parameterization:
+\begin{equation}
+  \label{eq:para}
+  v = \frac{\mu_{0}E}{[1+(\frac{E}{E_{0}})^{\beta}]^{1/\beta}} -   \mu_{n}E
+\end{equation}
+At low fields, the mobility becomes isotropic and therefore the mobility fit parameter $\mu_{0}$ is expected to become independent of the crystallographic direction. For hot electrons, the departure from a linear $v \sim E$ relation is modeled through the parameters $E_{0}$ and $\beta$. At high field, Mihailescu \textit{et al.}~\cite{miha} have added the term $\mu_{n}E$ to account for the \emph{Gunn effect} that was observed by Ottaviani \textit{et al.}~\cite{otta} for field strengths above 3~kV$/$cm at 80~K. However, this effect is insignificant in our detector operated with field strengths 0.1-3~kV$/$cm. Parameterization values fitted with the experimental data are summarized in Table~\ref{tab:pars}. The values from two different references are quite different from each other. We'd better measure it by ourselves again.
+
+\begin{table}[tbhp]
+  \centering
+  \begin{tabular}{ccccccc}\hline\hline
+     Reference & Carrier & Direction & $\mu_{0} \left[ \frac{\mbox{cm}^{2}}{\mbox{V}\cdot\mbox{s}} \right]$ & $E_{0} \left[ \frac{\mbox{V}}{\mbox{cm}} \right]$ & $\beta$ & $\mu_{n} \left[ \frac{\mbox{cm}^{2}}{\mbox{V}\cdot\mbox{s}} \right]$ \\\hline
+& Electron & $\langle111\rangle$ & 40180 & 493 & 0.72 & 589 \\
+Ref.~\cite{miha}& & $\langle100\rangle$ & 42420 & 251 & 0.87 & 62\\
+& Hole & $\langle111\rangle$ & 107270 & 100 & 0.58 & - \\
+& & $\langle100\rangle$ & 66333 & 181 & 0.744 & - \\\hline\hline
+& Electron & $\langle111\rangle$ & 38536 & 538 & 0.641 & 510 \\
+Ref.~\cite{bart}& & $\langle100\rangle$ & 38609 & 511 & 0.805 & -171\\ 
+& Hole & $\langle111\rangle$ & 61215 & 182 & 0.662 & - \\
+& & $\langle100\rangle$ & 61824 & 185 & 0.942 & - \\\hline\hline
+  \end{tabular}
+  \caption{Fit parameters for the experimental drift velocities in the 
+$\langle111\rangle$ and $\langle100\rangle$ directions.}
+\label{tab:pars}
+\end{table}
+
+The anisotropy in the general case is related to the longitudinal anisotropy in the $\langle100\rangle$ and $\langle111\rangle$ directions, hence the drift velocity in any direction can be calculated accordingly. The detailed calculation will be described in the following two sections.
 
 \subsubsection{Electron drift velocity}
 \label{sec:elec}
+There are four ellipsoidal valleys in the germanium crystal lying along the $\langle111\rangle$ directions as shown in Fig~\ref{fig:valley}. Electrons mostly populate in them and can be easily accelerated by the external electrical field. In the following discussion only the $\langle111\rangle$ ellipsoids are considered.
 \begin{figure}[tbhp]
   \centering
   \includegraphics[width=0.4\textwidth]{valleys.eps}  
@@ -24,7 +75,7 @@ The dependence of the electron drift velocity $\mathbf{v}_{e}$ on the applied el
   \label{eq:ed}
   \mathbf{v}_{e}(\mathbf{E}) = \mathcal{A}(|\mathbf{E}|) \sum_{j} \frac{n_{j}}{n}     \frac{\gamma_{j}\mathbf{E_{0}}}     {\sqrt{\mathbf{E_{0}}\gamma_{j}\mathbf{E_{0}}}},  \mbox{ with }     j=1,2,3,4
 \end{equation}
-where $\mathcal{A}$ is a function of the magnitude of the electric field and temperature, the value of $\mathcal{A}$ must be negative because electrons drift to the opposite direction of the electric field; $\mathbf{E_{0}}$ is the normalized electric field vector; $n_{j}/n$ is the fraction  of the carriers (in this case, electrons) in the $j$-th valley, $\gamma_{j}$ is the effective mass tensor for the $j$-th valley. In general the tensor $j$-th is given in terms of the rotation matrices $R_{i}$, responsible for aligning the $i$-th $\langle 111 \rangle$ axis with the Y-axis of the lab system, by
+where $\mathcal{A}$ is a function of the magnitude of the electric field and temperature, the value of $\mathcal{A}$ must be negative because electrons drift to the opposite direction of the electric field; $\mathbf{E_{0}}$ is the normalized electric field vector; $n_{j}/n$ is the fraction  of the carriers (in this case, electrons) in the $j$-th $\langle111\rangle$ valley, $\gamma_{j}$ is the effective mass tensor for the $j$-th $\langle111\rangle$ valley. In general the tensor $j$-th is given in terms of the rotation matrices $R_{i}$, responsible for aligning the $j$-th $\langle 111 \rangle$ axis with the Y-axis of the lab system, by
 \begin{equation}
   \label{eq:gammas}
   \gamma_{j} = R_{j}^{T}\gamma_{0}R_{j}, \mbox{ with } \gamma_{0}   \equiv \left(
@@ -82,28 +133,10 @@ One can get the value of $n_{1}/n$ and $n_{2}/n$ by solving the equations \ref{e
   \label{eq:re}
   \mathcal{R(|\mathbf{E}|)} = \left( \frac{n_{1}}{n} - \frac{n_{e}}{n}     \right) / \left(     \frac{\sqrt{\mathbf{E_{0}}\gamma_{1}\mathbf{E_{0}}}}
     {\sum_{i}\sqrt{\mathbf{E_{0}}\gamma_{i}\mathbf{E_{0}}}} -                           \frac{n_{e}}{n} \right),  \mbox{ with }           i=1,2,3,4 \mbox{ and       } \mathbf{E_{0}} = \left( \begin{array}{c} 
-      0\\ \sqrt{2}/\sqrt{3}\\1/\sqrt{3} \end{array} \right).
+      0\\ \sqrt{2/3}\\\sqrt{1/3} \end{array} \right).
 \end{equation}
 
-The dependence of the experimental $\langle111\rangle$ and $\langle100\rangle$ drift velocities on the electric field can be fitted with the empirical formula: 
-\begin{equation}
-  \label{eq:expe}  
-  v_{e}^{exp}(E) = \frac{\mu_{0}E}{(1+(E/E_{0})^{\beta})^{1/\beta}} - \mu_{n}E.
-\end{equation}
-The fitted parameters values are presented in Table~\ref{tab:pare}
-\begin{table}[tbhp]
-  \centering
-  \begin{tabular}{ccccc}\hline\hline
-    Direction & $\mu_{0} \left[ \frac{\mbox{cm}^{2}}{\mbox{V}\cdot\mbox{s}} \right]$ & $E_{0} \left[ \frac{\mbox{V}}{\mbox{cm}} \right]$ & $\beta$ & $\mu_{n} \left[ \frac{\mbox{cm}^{2}}{\mbox{V}\cdot\mbox{s}} \right]$ \\\hline
-$\langle111\rangle$ & 40180 & 493 & 0.72 & 589 \\
-$\langle100\rangle$ & 42420 & 251 & 0.87 & 62\\ \hline\hline
-  \end{tabular}
-  \caption{Fit parameters for the experimental drift velocities in the 
-$\langle111\rangle$ and $\langle100\rangle$ directions.}
-\label{tab:pare}
-\end{table}
-
-After determination of the parameters $\mathcal{A}$ and $\mathcal{R}$, the drift velocity can be calculated for any direction and any strength of the electric field.
+The dependence of the experimental $\langle111\rangle$ and $\langle100\rangle$ drift velocities on the electric field can be calculated using Eq.~\ref{eq:para}. After determination of the parameters $\mathcal{A}$ and $\mathcal{R}$, the drift velocity can be calculated for any direction and any strength of the electric field.
 
 \subsubsection{Hole drift velocity}
 \label{sec:hole}
@@ -137,23 +170,7 @@ The function $\Lambda$ and $\Omega$ govern the amplitude of the anisotropy and c
   \label{eq:ome}
    \Omega(k_{0}) = 0.006550k_{0} - 0.19946k_{0}^{2} + 0.09859k_{0}^{3} - 0.01559k_{0}^{4}
 \end{equation}
-The dependence of the experimental $\langle111\rangle$ and $\langle100\rangle$ drift velocities, \textit{i.e.} $v_{111}$ and $v_{100}$ on the electric field can be fitted with the empirical formula: 
-\begin{equation}
-  \label{eq:exph}  
-  v_{h}^{exp}(E) = \frac{\mu_{0}E}{(1+(E/E_{0})^{\beta})^{1/\beta}}.
-\end{equation}
-The fitted parameters values are presented in Table~\ref{tab:parh}
-\begin{table}[tbhp]
-  \centering
-  \begin{tabular}{cccc}\hline\hline
-    Direction & $\mu_{0} \left[ \frac{\mbox{cm}^{2}}{\mbox{V}\cdot\mbox{s}} \right]$ & $E_{0} \left[ \frac{\mbox{V}}{\mbox{cm}} \right]$ & $\beta$ \\\hline
-$\langle111\rangle$ & 107270 & 0.580 & 100 \\
-$\langle100\rangle$ & 66333 & 0.744 & 181 \\ \hline\hline
-  \end{tabular}
-  \caption{Fit parameters for the experimental drift velocities in the 
-$\langle111\rangle$ and $\langle100\rangle$ directions.}
-\label{tab:parh}
-\end{table}
+The dependence of the experimental $\langle111\rangle$ and $\langle100\rangle$ drift velocities, \textit{i.e.} $v_{111}$ and $v_{100}$ on the electric field can be calculated using Eq.~\ref{eq:para}.
 
 The three components $(v_{x}, v_{y}, v_{z})^{T}$ of the hole drift velocity $\mathbf{v}$ in the lab coordinate $xyz$ (as shown in Fig.~\ref{fig:vsphere}) can be calculated as:
 \begin{equation}
