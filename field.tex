@@ -1,7 +1,94 @@
-\subsection{Calculation of the electric fields and potentials}
+\subsection{Calculation of the Electric and Weighting Fields} 
 \label{sec:field}
+To calculate the electric field the poisson equation 
+\begin{equation}
+\nabla \varphi(\textbf{r}) = -\frac{1}{\epsilon_{0} \epsilon_{R}} \rho(\textbf{r})
+\label{eq:poisson}
+\end{equation} 
+needs to be solved. Since coaxial detectors are used
+the equation is rewritten in cylindrical coordinates 
+\begin{equation}
+\frac{1}{r} \frac{\partial \varphi}{\partial r} + \frac{\partial^{2} \varphi}{\partial r^{2}} + \frac{1}{r^{2}} \frac{\partial^{2} \varphi}{\partial \phi^{2}} +
+\frac{\partial^{2} \varphi}{\partial z^{2}} = - \frac{1}{\epsilon_{0}
+\epsilon_{R}} \rho(r).
+\label{eq:poisson_cyl}
+\end{equation}
 
+According to the Shockley-Ramo theorem the weighting potential
+$\varphi_{0}$ is needed to calculate the induced charges Q on the
+electrodes. Therefore the voltage on the electrodes for which the
+induced charge should be calculated is set to 1 and all others are set
+to 0. No space charges are taken into account, i.e. the Laplace equation
+needs to be solved. In cylindric coordinates this becomes 
+\begin{equation}
+\frac{1}{r}
+\frac{\partial \varphi}{\partial r} + \frac{\partial^{2} \varphi}{\partial
+r^{2}} + \frac{1}{r^{2}} \frac{\partial^{2} \varphi}{\partial \phi^{2}} +
+\frac{\partial^{2} \varphi}{\partial z^{2}} = 0.
+\label{eq:laplace}
+\end{equation}
 
+The electric field and the weighting potential are calculated on a
+grid using a numerical technique called Successive Overrelaxation
+(SOR). Numerical derivatives can be written as 
+\begin{eqnarray}
+\frac{\partial \varphi}{\partial x} = \frac{\varphi(x+1) - \varphi(x-1)}{2h_{x}} \label{eq:1stDerivative} \\
+\frac{\partial^{2} \varphi}{\partial x^{2}} = \frac{\varphi(x+1) - 2 \varphi(x) + \varphi(x-1)}{h^{2}_{x}} 
+\label{eq:2ndDerivative}
+\end{eqnarray}
+ with $\varphi(x+1)$ being value of $\varphi$ at the
+position $x+1$ and $h_{x}$ being the step width in $x$ direction. Using the derivatives from \eqref{eq:1stDerivative} and \eqref{eq:2ndDerivative}, \eqref{eq:poisson_cyl} can be rewritten as 
+\begin{equation}
+\begin{split}
+\varphi(r \,\phi \, z) = 
+\frac{1}{C} & \left( -\frac{\rho(r \, \phi \, z)}{\epsilon_{0}
+\epsilon_{R}} - \frac{1}{r}\frac{\varphi(r+1) - \varphi(r-1)}{2h_{r}} - 
+\frac{\varphi(r+1) + \varphi(r-1)}{h_{r}^{2}} \right. \\ 
+& \left. - \frac{1}{r^{2}} \frac{\varphi(\phi+1) + \varphi(\phi-1) }{h_{\phi}^{2}} - \frac{\varphi(z+1) + \varphi(z-1)}{h_{z}^{2}} \right ) , 
+\end{split}
+\label{eq:PotentialByNN}
+\end{equation}
+with $C = - \frac{2}{h_{r}^{2}} -
+\frac{2}{r^{2}h_{\phi}^{2}} - \frac{2}{h_{z}^{2}}  $.
+The value of the
+potential $\varphi$ at the position $(r,\phi,z)$ is now defined by its
+nearest neighours. In such a way the electric potential can be
+calculated in an iterative way by defining boundary conditions,
+i.e. the applied voltage on the detector surface. By updating the
+potential in iteration $n+1$ at each position 
+\begin{equation}
+\begin{split}
+\varphi(r \,\phi \, z)_{n+1}
+= \frac{1}{C} & \left( -\frac{\rho(r \, \phi \, z)}{\epsilon_{0}
+\epsilon_{R}} \right. - \frac{1}{r}\frac{\varphi(r+1)_{n} -
+\varphi(r-1)_{n}}{2h_{r}} - \frac{\varphi(r+1)_{n} + \varphi(r-1)_{n}}{h_{r}^{2}} \\
+&  -\left. \frac{1}{r^{2}} \frac{\varphi(\phi+1)_{n} +
+\varphi(\phi-1)_{n} }{h_{\phi}^{2}} - \frac{\varphi(z+1)_{n} +
+\varphi(z-1)_{n}}{h_{z}^{2}} \right) 
+\end{split}
+\label{eq:PotentialIteration}
+\end{equation}
+the potential percolates through the
+detector. The update of the potential value at each position needs to
+be done several times, until the change of the potential becomes
+negligible. This technique is called Gauss-Seidel method. The
+convergence of this method can be speed-up considerably. The value of
+the potential is then updated in this way 
+\begin{equation}
+\varphi(r, \phi, z)_{n+1}^{'} =
+SORConst \cdot (\varphi(r, \phi, z)_{n+1} - \varphi(r, \phi, z)_{n}) +
+\varphi(r, \phi, z)_{n}
+\label{eq:SOR}
+\end{equation}
+ with $1 \le SORConst \le 2$. This is called
+Successive Overrelaxation. 
+The same method is applied to the weighting potential.
+
+The update of the potential is stopped if the relative overall change
+of the potential in one iteration drops below a certain value, which
+has to be given by the user, typically $1 \cdot 10^{-5}$.
+
+Having finished updating the potential, differentiation of the potential yields the electric field.
 
 
 %%% Local Variables:
