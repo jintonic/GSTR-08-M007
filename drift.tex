@@ -28,17 +28,17 @@ electrical field.
 Germanium has the same crystalline structure as silicon and diamond, namely, a face-centered cubic (FCC) structure, in which each atom lies at the center of a regular tetrahedron, and is surrounded at its apices by four atoms as shown in Fig.~\ref{fig:xtal}
 \begin{figure}[tbhp]
   \centering
-  \includegraphics[width=0.6\textwidth]{xtalStruc.eps}  
+  \includegraphics[width=0.6\textwidth]{xtalStruc}  
   \caption{Structure of germanium crystal.}
   \label{fig:xtal}
 \end{figure}
 
-Due to the crystal lattice symmetry in germanium, in three directions, the crystallographic $\langle100\rangle$, $\langle110\rangle$ and $\langle111\rangle$, the mobility always has to be aligned with the electrical field. Consequently, the drift velocity has to be aligned with the symmetry axis. Therefore we can obtain not transverse anisotropy but longitudinal anisotropy of the drift mobility. Experimental data on the longitudinal anisotropy in these specific directions can be found in literature. The mobility data can be well fitted in any principal crystallographic direction with the parameterization:
+Due to the crystal lattice symmetry in germanium, in three directions, the crystallographic $\langle100\rangle$, $\langle110\rangle$ and $\langle111\rangle$, the mobility is always aligned with the electrical field. Consequently, the drift velocity is aligned with the symmetry axis as well. Therefore we can obtain the longitudinal anisotropy of the drift mobility in these special directions. Experimental data on the longitudinal anisotropy in these specific directions can be found in literature. The mobility data can be well fitted in any principal crystallographic direction with the parameterization:
 \begin{equation}
   \label{eq:para}
-  v = \frac{\mu_{0}E}{[1+(\frac{E}{E_{0}})^{\beta}]^{1/\beta}} -   \mu_{n}E
+  v = \frac{\mu_{0}E}{[1+(\frac{E}{E_{0}})^{\beta}]^{1/\beta}} -   \mu_{n}E,
 \end{equation}
-At low fields, the mobility becomes isotropic and therefore the mobility fit parameter $\mu_{0}$ is expected to become independent of the crystallographic direction. For hot electrons, the departure from a linear $v \sim E$ relation is modeled through the parameters $E_{0}$ and $\beta$. At high field, Mihailescu \textit{et al.}~\cite{miha} have added the term $\mu_{n}E$ to account for the \emph{Gunn effect} that was observed by Ottaviani \textit{et al.}~\cite{otta} for field strengths above 3~kV$/$cm at 80~K. However, this effect is insignificant in our detector operated with field strengths 0.1-3~kV$/$cm. Parameterization values fitted with the experimental data are summarized in Table~\ref{tab:pars}. The values from two different references are quite different from each other. We'd better measure it by ourselves again.
+where $E, v$ are the magnitudes of the electric field and drift velocity, respectively, $\mu_{0}, \mu_{n}, E_{0}$ and $\beta$ are the fitting parameters. At low fields, the mobility becomes isotropic and therefore the mobility fit parameter $\mu_{0}$ is expected to become independent of the crystallographic direction. For hot electrons, the departure from a linear $v \sim E$ relation is modeled through the parameters $E_{0}$ and $\beta$. At high field, Mihailescu \textit{et   al.}~\cite{miha} have added the term $\mu_{n}E$ to account for the \emph{Gunn effect} that was observed by Ottaviani \textit{et   al.}~\cite{otta} for field strengths above 3~kV$/$cm at 80~K. However, this effect is insignificant in our detector operated with field strengths 0.1-3~kV$/$cm. Parameterization values fitted with the experimental data are summarized in Table~\ref{tab:pars}. The values from two different references are quite different from each other. We'd better measure it by ourselves again.
 
 \begin{table}[tbhp]
   \centering
@@ -58,57 +58,75 @@ $\langle111\rangle$ and $\langle100\rangle$ directions.}
 \label{tab:pars}
 \end{table}
 
-The anisotropy in the general case is related to the longitudinal anisotropy in the $\langle100\rangle$ and $\langle111\rangle$ directions, hence the drift velocity in any direction can be calculated accordingly. The detailed calculation will be described in the following two sections.
+The anisotropy in any direction is related to the longitudinal anisotropy in the $\langle100\rangle$ and $\langle111\rangle$ directions. The drift velocity in any direction can be calculated accordingly. The detailed calculation will be described in the following two sections.
+
+It is very important to distinguish two different coordinate systems in the calculation. One is the coordinate defined by the crystal axes $\langle100\rangle$, $\langle010\rangle$ and $\langle001\rangle$. They are perpendicular to each other hence can be used as the axes of a Cartesian coordinate. The other one, indicated as $xyz$ in Fig~\ref{fig:coo}, is used in Geant4 geometry modeling. When you construct your detector as a Geant4 tube, the locate coordinate system attached to this tube is shown in Fig~\ref{fig:coo} as $xyz$. Our germanium detector has a cylindrical shape. The crystal is produced such that its $\langle001\rangle$ axis is aligned with the middle axis of the cylinder, \textit{i.e.} aligned with the z-axis of the coordinate used in Geant4 simulation. So the relation between the two coordinates can be described by an angle between the $\langle110\rangle$ axis and the y-axis, $\phi_{110}$.
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=0.3\textwidth]{coordins}  
+  \caption{The relation between the coordinate $xyz$ used in Geant4     simulation and the one defined by the crystal axes     $\langle100\rangle$, $\langle010\rangle$ and $\langle001\rangle$.}
+  \label{fig:coo}
+\end{figure}
 
 \subsubsection{Electron drift velocity}
 \label{sec:elec}
-There are four ellipsoidal valleys in the germanium crystal lying along the $\langle111\rangle$ directions as shown in Fig~\ref{fig:valley}. Electrons mostly populate in them and can be easily accelerated by the external electrical field. In the following discussion only the $\langle111\rangle$ ellipsoids are considered.
-\begin{figure}[tbhp]
+There are four ellipsoidal valleys in the germanium crystal lying along the $\langle111\rangle$ directions as shown in Fig~\ref{fig:valley}. Electrons mostly populate in them and can be easily accelerated by the external electrical field. The population of electrons in other directions is very small and is neglected in the following calculation.
+\begin{wrapfigure}{O}{0.4\textwidth}
   \centering
-  \includegraphics[width=0.4\textwidth]{valleys.eps}  
-  \caption{Orientations of the crystal axes and valleys in the lab coordinate system XYZ.}
+  \includegraphics[width=0.4\textwidth]{valleys}  
+  \caption{Four ellipsoidal valleys along $\langle111\rangle$     directions, where electrons mostly populate.}
   \label{fig:valley}
-\end{figure}
+\end{wrapfigure}
 
-The dependence of the electron drift velocity $\mathbf{v}_{e}$ on the applied electric field $\mathbf{E}$ is taken to be
+Only considering the effect of the four ellipsoidal valleys shown in Fig~\ref{fig:valley}, the dependence of the electron drift velocity $\mathbf{v}_{e}$ on the applied electric field $\mathbf{E}$ is taken to be
 \begin{equation}
   \label{eq:ed}
-  \mathbf{v}_{e}(\mathbf{E}) = \mathcal{A}(|\mathbf{E}|) \sum_{j} \frac{n_{j}}{n}     \frac{\gamma_{j}\mathbf{E_{0}}}     {\sqrt{\mathbf{E_{0}}\gamma_{j}\mathbf{E_{0}}}},  \mbox{ with }     j=1,2,3,4
+  \mathbf{v}_{e}(\mathbf{E}) = \mathcal{A}(E) \sum_{j}     \frac{n_{j}}{n} \frac{\gamma_{j}\mathbf{E_{0}}}           {\sqrt{\mathbf{E_{0}}\gamma_{j}\mathbf{E_{0}}}}, \mbox{ with }           j=1,2,3,4
 \end{equation}
-where $\mathcal{A}$ is a function of the magnitude of the electric field and temperature, the value of $\mathcal{A}$ must be negative because electrons drift to the opposite direction of the electric field; $\mathbf{E_{0}}$ is the normalized electric field vector; $n_{j}/n$ is the fraction  of the carriers (in this case, electrons) in the $j$-th $\langle111\rangle$ valley, $\gamma_{j}$ is the effective mass tensor for the $j$-th $\langle111\rangle$ valley. In general the tensor $j$-th is given in terms of the rotation matrices $R_{i}$, responsible for aligning the $j$-th $\langle 111 \rangle$ axis with the Y-axis of the lab system, by
+where $\mathcal{A}$ is a function of the magnitude of the electric field $E=|\mathbf{E}|$ and temperature, the value of $\mathcal{A}$ must be negative because electrons drift to the opposite direction of the electric field; $\mathbf{E_{0}}$ is the normalized electric field vector; $n_{j}/n$ is the fraction of the carriers (in this case, electrons) in the $j$-th $\langle111\rangle$ valley, $\gamma_{j}$ is the effective mass tensor for the $j$-th $\langle111\rangle$ valley. In the local coordinate of one of the ellipsoidal valleys $x^{\prime}y^{\prime}z^{\prime}$, as shown in Fig.~\ref{fig:axes}, the effective mass tensor has a very simple expression:
 \begin{equation}
-  \label{eq:gammas}
-  \gamma_{j} = R_{j}^{T}\gamma_{0}R_{j}, \mbox{ with } \gamma_{0}   \equiv \left(
+  \label{eq:gamma0}
+  \gamma_{0} \equiv \left(
     \begin{array}{ccc}
       m_{t}^{-1} & 0 & 0 \\
       0 & m_{l}^{-1} & 0 \\
       0 & 0 & m_{t}^{-1}
     \end{array} \right),
 \end{equation}
-where $m_{t} = 1.64m_{e}, m_{l} = 0.0819m_{e}$ with $m_{e}$ denoting the free electron mass, and the rotation matrix $R_{j} = R_{x^{\prime}}(\arccos(\sqrt{2/3}))R_{z}((j-1)\pi/2)$.
+where $m_{t} = 1.64m_{e}$ is the transverse effective electron mass, $m_{l} = 0.0819m_{e}$ is the longitudinal effective electron mass, with $m_{e}$ denoting the free electron mass. Since it is convenient to simulate the interactions and the pulse shape developing in the same coordinate $xyz$, as shown in Fig.~\ref{fig:coo} and \ref{fig:axes}, we have to calculate the expressions of $\gamma_{j}$'s in $xyz$:
+\begin{equation}
+  \label{eq:gammas}
+  \gamma_{j} = R_{j}^{-1}\gamma_{0}R_{j} = R_{j}^{T}\gamma_{0}R_{j},
+\end{equation}
+where
+\begin{equation}
+  \label{eq:rs}
+  R_{j} = R_{x^{\prime}}(\arccos(\sqrt{2/3}))R_{z}(\phi_{110}+(j-1)\pi/2)
+\end{equation}
+is the rotation matrix which could align $\langle111\rangle$ axis to the y-axis.
 
 \begin{figure}[tbhp]
   \centering
-  \includegraphics[width=0.6\textwidth]{axes.eps}  
-  \caption{Orientations of the crystal axes and valleys in the lab coordinate system XYZ.}
+  \includegraphics[width=0.4\textwidth]{axes}  
+  \caption{Relation between the local coordinate     $x^{\prime}y^{\prime}z^{\prime}$ of one of the four ellipsoidal     valleys and the Geant4 coordinate $xyz$. The $x^{\prime}$ axis is     perpendicular to the plane defined by $\langle111\rangle$ and     $\langle001\rangle$.}
   \label{fig:axes}
 \end{figure}
 
 For an experimental determination of the repopulation amplitude, the deviation from a uniform population distribution $n_{e}/n$ (1/4 for germanium) is assumed to vary with the electric field weighted by the factor $\mathcal{R}$:
 \begin{equation}
   \label{eq:nion}
-  \frac{n_{j}}{n} = \mathcal{R(|\mathbf{E}|)}   \left[         \frac{\sqrt{\mathbf{E_{0}}\gamma_{j}\mathbf{E_{0}}}}
-    {\sum_{i}\sqrt{\mathbf{E_{0}}\gamma_{i}\mathbf{E_{0}}}} -               \frac{n_{e}}{n} \right] + \frac{n_{e}}{n},  \mbox{ with }           i=1,2,3,4
+  \frac{n_{j}}{n} = \mathcal{R}(E)   \left[         \frac{\sqrt{\mathbf{E_{0}}\gamma_{j}\mathbf{E_{0}}}}
+    {\sum_{i}\sqrt{\mathbf{E_{0}}\gamma_{i}\mathbf{E_{0}}}} -               \frac{n_{e}}{n} \right] + \frac{n_{e}}{n}, 
 \end{equation}
 
-If the electric field vector is equally oriented with respect to all the $\langle111\rangle$ directions, there is an uniform repopulation of the conduction bands, \textit{i.e.} $n_{j}/n = 1/4$. An electric field applied along the $\langle100\rangle$ direction, \textit{i.e.} $\mathbf{E_{0}} = (1/\sqrt{2},1/\sqrt{2},0)^{T}$, satisfies this condition. By employing the experimental drift velocity $v_{e}^{exp}(E)$ for an applied electric field $E$ in the $\langle100\rangle$ direction at a specific temperature, the absolute value  of $\mathcal{A}(|\mathbf{E}|)$ can be calculated as
+If the electric field vector is equally oriented with respect to all the $\langle111\rangle$ directions, there is an uniform repopulation of the conduction bands, \textit{i.e.} $n_{j}/n = 1/4$. An electric field applied along the $\langle100\rangle$ direction, \textit{i.e.} $\mathbf{E_{0}} = (\sqrt{1/2},\sqrt{1/2},0)^{T}$ in coordinate $xyz$, satisfies this condition. By employing the experimental drift velocity $v_{e}^{100}(E)$ which can be calculated using Eq.~\ref{eq:para}, the absolute value of $\mathcal{A}(E)$ can be calculated as
 \begin{equation}
   \label{eq:ae}
-  \mathcal{A}(|\mathbf{E}|) = \frac{v_{e}^{exp}(E)}  {\displaystyle \sum_{j}     \frac{1}{4}     \frac{\gamma_{j}\mathbf{E_{0}}}         {\sqrt{\mathbf{E_{0}}\gamma_{j}\mathbf{E_{0}}}} },  \mbox{ with }       \mathbf{E_{0}} = \left( \begin{array}{c} 
-    1/\sqrt{2}\\1/\sqrt{2}\\0 \end{array} \right).
+  |\mathcal{A}(E)| = \frac{v_{e}^{100}(E)}  {\displaystyle \sum_{j}     \frac{1}{4}     \frac{\gamma_{j}\mathbf{E_{0}}}         {\sqrt{\mathbf{E_{0}}\gamma_{j}\mathbf{E_{0}}}} },  \mbox{ with }       \mathbf{E_{0}} = \left( \begin{array}{c} 
+    \sqrt{1/2}\\\sqrt{1/2}\\0 \end{array} \right).
 \end{equation}
 
-If the electric field vector is oriented along with one of the $\langle111\rangle$ directions, \textit{i.e.} $\mathbf{E_{0}} = (0,\sqrt{2}/\sqrt{3},1/\sqrt{3})^{T}$, there is an uniform repopulation of the conduction bands among the other three $\langle111\rangle$-axes, \textit{i.e.}
+If the electric field vector is oriented along with one of the $\langle111\rangle$ directions, \textit{i.e.} $\mathbf{E_{0}} = (0,\sqrt{2/3},\sqrt{1/3})^{T}$ in coordinate $xyz$, there is an uniform repopulation of the conduction bands among the other three $\langle111\rangle$ axes, \textit{i.e.}
 \begin{equation}
   \label{eq:n111}
   \frac{n_{2}}{n} = \frac{n_{3}}{n} = \frac{n_{4}}{n}.
@@ -123,20 +141,20 @@ we have
   \label{eq:n12}
   \frac{n_{1}}{n} + 3\frac{n_{2}}{n}= 1.
 \end{equation}
-By employing the experimental drift velocity $v_{e}^{exp}(E)$ for an applied electric field $E$ in the $\langle111\rangle$ direction at a specific temperature, we have another relation between $n_{1}/n$ and $n_{2}/n$:
+By employing the experimental drift velocity $v_{e}^{111}(E)$ for an applied electric field $E$ in the $\langle111\rangle$ direction at a specific temperature, which can be calculated using Eq.~\ref{eq:para}, we have another relation between $n_{1}/n$ and $n_{2}/n$:
 \begin{equation}
   \label{eq:n12p}
-  v_{e}^{exp}(E) =  \mathcal{A}(|\mathbf{E}|) \left(  \frac{n_{1}}{n} \frac{\gamma_{1}\mathbf{E_{0}}}         {\sqrt{\mathbf{E_{0}}\gamma_{1}\mathbf{E_{0}}}} +  3\frac{n_{2}}{n} \frac{\gamma_{2}\mathbf{E_{0}}}         {\sqrt{\mathbf{E_{0}}\gamma_{2}\mathbf{E_{0}}}} \right).
+  v_{e}^{111}(E) =  \mathcal{A}(E) \left(  \frac{n_{1}}{n} \frac{\gamma_{1}\mathbf{E_{0}}}         {\sqrt{\mathbf{E_{0}}\gamma_{1}\mathbf{E_{0}}}} +  3\frac{n_{2}}{n} \frac{\gamma_{2}\mathbf{E_{0}}}         {\sqrt{\mathbf{E_{0}}\gamma_{2}\mathbf{E_{0}}}} \right).
 \end{equation}
-One can get the value of $n_{1}/n$ and $n_{2}/n$ by solving the equations \ref{eq:n12} and \ref{eq:n12p} together. Then $\mathcal{R}(|\mathbf{E}|)$ can be calculated as
+One can get the value of $n_{1}/n$ and $n_{2}/n$ by solving the equations \ref{eq:n12} and \ref{eq:n12p} together. Then $\mathcal{R}(E)$ can be calculated as
 \begin{equation}
   \label{eq:re}
-  \mathcal{R(|\mathbf{E}|)} = \left( \frac{n_{1}}{n} - \frac{n_{e}}{n}     \right) / \left(     \frac{\sqrt{\mathbf{E_{0}}\gamma_{1}\mathbf{E_{0}}}}
-    {\sum_{i}\sqrt{\mathbf{E_{0}}\gamma_{i}\mathbf{E_{0}}}} -                           \frac{n_{e}}{n} \right),  \mbox{ with }           i=1,2,3,4 \mbox{ and       } \mathbf{E_{0}} = \left( \begin{array}{c} 
-      0\\ \sqrt{2/3}\\\sqrt{1/3} \end{array} \right).
+  \mathcal{R}(E) = \left( \frac{n_{1}}{n} - \frac{n_{e}}{n} \right) / \left( \frac{\sqrt{\mathbf{E_{0}}\gamma_{1}\mathbf{E_{0}}}}
+    {\sum_{j}\sqrt{\mathbf{E_{0}}\gamma_{j}\mathbf{E_{0}}}} -                           \frac{n_{e}}{n} \right), \mbox{ with } \mathbf{E_{0}} = \left( \begin{array}{c} 
+  0\\ \sqrt{2/3}\\\sqrt{1/3} \end{array} \right).
 \end{equation}
 
-The dependence of the experimental $\langle111\rangle$ and $\langle100\rangle$ drift velocities on the electric field can be calculated using Eq.~\ref{eq:para}. After determination of the parameters $\mathcal{A}$ and $\mathcal{R}$, the drift velocity can be calculated for any direction and any strength of the electric field.
+After determination of the parameters $\mathcal{A}$ and $\mathcal{R}$, the drift velocity can be calculated for any direction and any strength of the electric field.
 
 \subsubsection{Hole drift velocity}
 \label{sec:hole}
@@ -151,7 +169,7 @@ The three components $(v_{x^{\prime}}, v_{y^{\prime}}, v_{z^{\prime}})^{T}$ of t
 \end{equation}
 \begin{figure}[tbhp]
   \centering
-  \includegraphics[width=0.6\textwidth]{vsphere.eps}  
+  \includegraphics[width=0.5\textwidth]{vsphere}  
   \caption{Orientations of the crystal axes and valleys in the lab
 coordinate system XYZ.}
   \label{fig:vsphere}
