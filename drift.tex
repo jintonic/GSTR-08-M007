@@ -93,7 +93,7 @@ where $\mathcal{A}$ is a function of the magnitude of the electric field $E=|\ma
       0 & 0 & m_{t}^{-1}
     \end{array} \right),
 \end{equation}
-where $m_{t} = 1.64m_{e}$ is the transverse effective electron mass, $m_{l} = 0.0819m_{e}$ is the longitudinal effective electron mass, with $m_{e}$ denoting the free electron mass. Since it is convenient to simulate the interactions and the pulse shape developing in the same coordinate $xyz$, as shown in Fig.~\ref{fig:coo} and \ref{fig:axes}, we have to calculate the expressions of $\gamma_{j}$'s in $xyz$:
+where $m_{t} = 1.64m_{e}$ is the transversal effective electron mass, $m_{l} = 0.0819m_{e}$ is the longitudinal effective electron mass, with $m_{e}$ denoting the free electron mass. Since it is convenient to simulate the interactions and the pulse shape developing in the same coordinate $xyz$, as shown in Fig.~\ref{fig:coo} and \ref{fig:axes}, we have to calculate the expressions of $\gamma_{j}$'s in $xyz$:
 \begin{equation}
   \label{eq:gammas}
   \gamma_{j} = R_{j}^{-1}\gamma_{0}R_{j} = R_{j}^{T}\gamma_{0}R_{j},
@@ -103,7 +103,7 @@ where
   \label{eq:rs}
   R_{j} = R_{x^{\prime}}(\arccos(\sqrt{2/3}))R_{z}(\phi_{110}+(j-1)\pi/2)
 \end{equation}
-is the rotation matrix which could align $\langle111\rangle$ axis to the y-axis.
+is the rotation matrix which could align $\langle111\rangle$ axis to the y-axis. The suffix of $R$'s indicate the rotation axes. The rotation angles are denoted in the brackets following the $R$'s. All the rotations are defined in the counter-clockwise sense.
 
 \begin{figure}[tbhp]
   \centering
@@ -158,39 +158,44 @@ After determination of the parameters $\mathcal{A}$ and $\mathcal{R}$, the drift
 
 \subsubsection{Hole drift velocity}
 \label{sec:hole}
-The three components $(v_{x^{\prime}}, v_{y^{\prime}}, v_{z^{\prime}})^{T}$ of the hole drift velocity $\mathbf{v}$ in the local coordinate $x^{\prime}y^{\prime}z^{\prime}$ (as shown in Fig.~\ref{fig:vsphere}) can be expressed as:
+The model used in calculating the hole drift velocity is taken from Ref.~\cite{bart}. In this model the so-called heavy hole valence band is solely responsible for the anisotropic mobility while the other effects are neglected. The holes are accelerated in the electrical field until their energy becomes 0.037~eV. At this point their energy is sufficiently large to emit an optical phonon, a process which is very likely to happen. By emitting an optical phonon, the hole typically loses most of its energy and resumes acceleration in the field direction and a new cycle starts. 
+
+From this picture, the properties of the probability distribution function for finding a heavy hole in a specific momentum state, $\mathbf{k}$, can be predicted. The distribution should peak in the direction in which $\mathbf{k}$ is parallel to the electrical field. So the mean wave vector $\mathbf{k}_{0}(k_{0}, \theta_{0}, \phi_{0})$ is assumed to be aligned with the applied electrical field $\mathbf{E}(E, \theta, \phi)$, \textit{i.e.} $\theta_{0} = \theta, \phi_{0} = \phi$, where $\theta, \phi$ are the polar and azimuthal angles with respect to the coordinate defined by the $\langle100\rangle$, $\langle010\rangle$ and $\langle001\rangle$ axes as shown in Fig.~\ref{fig:vsphere}.
+\begin{figure}[tbhp]
+  \centering
+  \includegraphics[width=0.4\textwidth]{vsphere}  
+  \caption{Relation between the coordinate defined by the crystal
+$\langle100\rangle$, $\langle010\rangle$ and $\langle001\rangle$ axes,
+the one used in the Geant4 simulation, $xyz$ and the local coordinate
+$x^{\prime}y^{\prime}z^{\prime}$ attached to each position.}
+  \label{fig:vsphere}
+\end{figure}
+
+The three components $(v_{x^{\prime}}, v_{y^{\prime}}, v_{z^{\prime}})^{T}$ of the hole drift velocity $\mathbf{v}$ in the local coordinate $x^{\prime}y^{\prime}z^{\prime}$ at any position $(r, \theta, \phi)$ (as shown in Fig.~\ref{fig:vsphere}) can be expressed as:
 \begin{equation}
   \label{eq:vsphere}
   \begin{array}{rcl}
-   v_{x^{\prime}} = v_{r} &=& v_{100}(E)[1-\Lambda(k_{0})(\sin(\theta)^{4}\sin(2\phi)^{2} + \sin(2\theta)^{2})]\\
-   v_{y^{\prime}} = v_{\theta} &=& v_{100}(E)\Omega(k_{0})[2\sin(\theta)^{3}\cos(\theta)\sin(2\phi)^{2} + \sin(4\theta)]\\
-    v_{z^{\prime}} = v_{\phi} &=& v_{100}(E)\Omega(k_{0})\sin(\theta)^{3}\sin(4\phi)
+   v_{x^{\prime}} = v_{r} &=& v^{100}_{h}(E)[1-\Lambda(k_{0})(\sin(\theta)^{4}\sin(2\phi)^{2} + \sin(2\theta)^{2})],\\
+   v_{y^{\prime}} = v_{\theta} &=& v^{100}_{h}(E)\Omega(k_{0})[2\sin(\theta)^{3}\cos(\theta)\sin(2\phi)^{2} + \sin(4\theta)],\\
+    v_{z^{\prime}} = v_{\phi} &=& v^{100}_{h}(E)\Omega(k_{0})\sin(\theta)^{3}\sin(4\phi).
   \end{array}
 \end{equation}
-\begin{figure}[tbhp]
-  \centering
-  \includegraphics[width=0.5\textwidth]{vsphere}  
-  \caption{Orientations of the crystal axes and valleys in the lab
-coordinate system XYZ.}
-  \label{fig:vsphere}
-\end{figure}
-The mean wave number $k_{0}$ can be expressed as a function of $v_{rel} = v_{111}/v_{100}$:
+The mean wave number $k_{0}$ can be expressed as a function of $v_{rel} = v^{111}_{h}(E)/v^{100}_{h}(E)$:
 \begin{equation}
   \label{eq:k0}
-   k_{0}(v_{rel}) = 9.2652 - 26.3467v_{rel} + 29.6137v_{rel}^{2} - 12.3689v_{rel}^{3}
+   k_{0}(v_{rel}) = 9.2652 - 26.3467v_{rel} + 29.6137v_{rel}^{2} - 12.3689v_{rel}^{3},
 \end{equation}
-The function $\Lambda$ and $\Omega$ govern the amplitude of the anisotropy and can be expressed as
+where $v^{111}_{h}(E)$ and $v^{100}_{h}(E)$ indicate the drift velocity along the $\langle111\rangle$ and $\langle100\rangle$ direction. They can be calculated using Eq.~\ref{eq:para}. The function $\Lambda$ and $\Omega$ govern the amplitude of the anisotropy and can be expressed as
 \begin{equation}
   \label{eq:lamb}
-   \Lambda(k_{0}) = -0.01322k_{0} + 0.41145k_{0}^{2} - 0.23657k_{0}^{3} + 0.04077k_{0}^{4}
+   \Lambda(k_{0}) = -0.01322k_{0} + 0.41145k_{0}^{2} - 0.23657k_{0}^{3} + 0.04077k_{0}^{4},
 \end{equation}
 \begin{equation}
   \label{eq:ome}
-   \Omega(k_{0}) = 0.006550k_{0} - 0.19946k_{0}^{2} + 0.09859k_{0}^{3} - 0.01559k_{0}^{4}
+   \Omega(k_{0}) = 0.006550k_{0} - 0.19946k_{0}^{2} + 0.09859k_{0}^{3} - 0.01559k_{0}^{4}.
 \end{equation}
-The dependence of the experimental $\langle111\rangle$ and $\langle100\rangle$ drift velocities, \textit{i.e.} $v_{111}$ and $v_{100}$ on the electric field can be calculated using Eq.~\ref{eq:para}.
 
-The three components $(v_{x}, v_{y}, v_{z})^{T}$ of the hole drift velocity $\mathbf{v}$ in the lab coordinate $xyz$ (as shown in Fig.~\ref{fig:vsphere}) can be calculated as:
+The three components $(v_{x}, v_{y}, v_{z})^{T}$ of the hole drift velocity $\mathbf{v}$ in the coordinate $xyz$ (as shown in Fig.~\ref{fig:vsphere}) can be calculated as:
 \begin{equation}
   \label{eq:v2v}  
   \left(
@@ -200,8 +205,9 @@ The three components $(v_{x}, v_{y}, v_{z})^{T}$ of the hole drift velocity $\ma
 \right) = R_{z}(\phi + \frac{\pi}{4} + \phi_{110}) R_{y^{\prime}}(\theta) \left( 
     \begin{array}{c}
       v_{x^{\prime}} \\ v_{y^{\prime}} \\ v_{z^{\prime}}
-    \end{array} \right)
+    \end{array} \right),
 \end{equation}
+where $R$'s indicate the rotation matrix along a specific axis, such as $y^{\prime}$ or $z$. The rotation angles are denoted in the following brackets. All the rotations are defined in the counter-clockwise sense.
 
 %%% Local Variables:
 %%% mode:latex
