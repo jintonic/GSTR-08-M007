@@ -7,4 +7,4 @@ pdf:
 pub:
 	scp GSTR-08-M007.pdf www.mppmu.mpg.de:/WWW/Gerda/internal_mpi_gerda/notes
 clean:
-	rm -f *.bak *.pstex* *.aux *.toc *.log *.out *.dvi 
+	rm -f *.bak *.pstex* *.aux *.toc *.log *.out *.dvi *.pdf
